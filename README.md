@@ -48,6 +48,3 @@ Property managers waste hours answering the same questions. Renters get stuck di
 - Upload property-related docs (leases, FAQs, rules).  
 - The model trains on that data and generates answers.  
 - Run it locally—no external calls, no extra costs.  
-
-📌 **For any questions or contributions, feel free to reach out!**  
-
