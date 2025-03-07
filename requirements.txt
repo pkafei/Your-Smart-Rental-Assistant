@@ -1,0 +1,10 @@
+streamlit
+openai
+gpt4all
+chromadb
+langchain
+langchain-community
+pypdf
+unstructured
+python-dotenv
+tiktoken  # Ensures OpenAI models work properly
