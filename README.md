@@ -29,8 +29,8 @@ Property managers waste hours answering the same questions. Renters get stuck di
 
 1. **Clone the repo:**  
    ```bash
-   git clone 
-   cd 
+   git clone https://github.com/pkafei/Your-Smart-Rental-Assistant
+   cd Your-Smart-Rental-Assistant
    ```
 
 2. **Set up the environment:**  
