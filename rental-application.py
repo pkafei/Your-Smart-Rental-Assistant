@@ -6,11 +6,11 @@ from langchain_community.embeddings import GPT4AllEmbeddings
 from langchain_community.document_loaders import PyPDFLoader, TextLoader, UnstructuredWordDocumentLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 
-# ✅ Ensure directories exist
+# Ensure directories exist
 DOCS_FOLDER = "documents/"
 os.makedirs(DOCS_FOLDER, exist_ok=True)
 
-# ✅ Load GPT4All model
+# Load GPT4All model
 model_path = os.path.abspath("models/mistral-7b-instruct-v0.1.Q4_K_M.gguf")
 os.environ["GPT4ALL_MODEL_PATH"] = os.path.dirname(model_path)
 
@@ -20,7 +20,7 @@ except Exception as e:
     st.error(f"⚠️ Error loading GPT4All model: {e}")
     st.stop()
 
-# ✅ Load documents from folder
+# Load documents from folder
 def load_documents():
     docs = []
     for file in os.listdir(DOCS_FOLDER):
@@ -36,7 +36,7 @@ def load_documents():
         docs.extend(loader.load())
     return docs
 
-# ✅ Process and store docs in ChromaDB (Handles missing documents)
+# Process and store docs in ChromaDB (Handles missing documents)
 def process_documents():
     docs = load_documents()
 
@@ -51,19 +51,19 @@ def process_documents():
         st.warning("⚠️ No valid text found in documents. Ensure files have readable content.")
         return None
 
-    # ✅ Fix ChromaDB Connection by Persisting Data
+    # Fix ChromaDB Connection by Persisting Data
     vector_db = Chroma.from_documents(
         chunks, embedding=GPT4AllEmbeddings(), persist_directory="vector_cache/"
     )
     vector_db.persist()  # Save embeddings persistently
     return vector_db
 
-# ✅ Initialize vector DB if documents exist
+# Initialize vector DB if documents exist
 vector_db = process_documents()
 if vector_db:
     st.session_state.vector_db = vector_db
 
-# ✅ Function to query GPT4All with document context
+# Function to query GPT4All with document context
 def query_gpt4all_with_docs(user_input):
     vector_db = st.session_state.get("vector_db", None)
     if not vector_db:
@@ -77,7 +77,7 @@ def query_gpt4all_with_docs(user_input):
 
     return response
 
-# ✅ Rental Application Form
+# Rental Application Form
 st.title("Strawberry Oaks Rental Application - AI Assistant")
 with st.form("my_form"):
     st.text_input("First and Last Name")
@@ -85,7 +85,7 @@ with st.form("my_form"):
     st.text_input("Phone Number")
     st.form_submit_button("Submit")
 
-# ✅ Sidebar with Example Questions & Chatbot
+# Sidebar with Example Questions & Chatbot
 with st.sidebar:
     st.title("Ask a question about the rental agreement")
     
@@ -95,7 +95,7 @@ with st.sidebar:
     st.write("Is there a pet deposit or a monthly fee? 🐕‍🦺")
     st.write("Are there nearby construction projects or busy roads? 🚧")
 
-    # ✅ Move Chatbot to Sidebar
+    # Move Chatbot to Sidebar
     user_question = st.text_input("Type your question here:")
 
     if user_question:
